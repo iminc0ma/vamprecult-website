@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gothic Art Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* -- GENERAL STYLES -- */
+body{margin:0;padding:0;font-family:'Crimson Text',serif;background:#0a0a0a;color:#e8e8e8;overflow-x:hidden;}*{box-sizing:border-box;}
+.page-container{min-height:100%;display:flex;flex-direction:column;}
+.header{padding:60px 20px;text-align:center;border-bottom:2px solid;position:relative;}
+.header::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:2px;background:#8b0000;}
+.artist-name{font-family:'Cinzel',serif;font-size:48px;font-weight:700;margin:0 0 15px 0;letter-spacing:4px;text-transform:uppercase;}
+.tagline{font-size:20px;font-style:italic;margin:0;opacity:0.9;}
+.nav{display:flex;justify-content:center;gap:40px;padding:30px 20px;flex-wrap:wrap;border-bottom:1px solid;}
+.nav-link{font-family:'Cinzel',serif;font-size:14px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:8px 16px;border:1px solid transparent;transition:all 0.3s ease;text-decoration:none;color:#e8e8e8;}
+.nav-link:hover{border:1px solid #e8e8e8;}
+.nav-link.active{border:1px solid #8b0000;}
+.content{flex:1;padding:60px 20px;max-width:1400px;margin:0 auto;width:100%;}
+.section{display:none;animation:fadeIn 0.5s ease;}
+.section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.section-title{font-family:'Cinzel',serif;font-size:36px;text-align:center;margin:0 0 50px 0;letter-spacing:3px;text-transform:uppercase;}
+.prints-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:40px;margin-bottom:60px;}
+.print-card{border:2px solid #4a0404;padding:20px;transition:all 0.3s ease;cursor:pointer;position:relative;background:#1a1a1a;}
+.print-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.3);border-color:#8b0000;}
+.print-image{width:100%;height:250px;display:flex;align-items:center;justify-content:center;border:1px solid #4a0404;margin-bottom:20px;font-size:72px;position:relative;overflow:hidden;}
+.print-lock{position:absolute;top:10px;right:10px;font-size:24px;opacity:0.7;}
+.print-title{font-family:'Cinzel',serif;font-size:20px;margin:0 0 10px 0;letter-spacing:1px;}
+.print-description{font-size:16px;margin:0 0 15px 0;opacity:0.8;}
+.print-price{font-family:'Cinzel',serif;font-size:18px;font-weight:600;}
+.subscription-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;max-width:1000px;margin:0 auto 60px auto;}
+.tier-card{border:2px solid #4a0404;padding:40px 30px;text-align:center;transition:all 0.3s ease;position:relative;background:#1a1a1a;}
+.tier-card:hover{transform:scale(1.05);box-shadow:0 15px 40px rgba(0,0,0,0.4);border-color:#8b0000;}
+.tier-card.featured{border-width:3px;}
+.tier-badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-family:'Cinzel',serif;font-size:12px;padding:5px 20px;border:2px solid #8b0000;letter-spacing:2px;text-transform:uppercase;}
+.tier-icon{font-size:48px;margin-bottom:20px;}
+.tier-name{font-family:'Cinzel',serif;font-size:28px;margin:0 0 15px 0;letter-spacing:2px;text-transform:uppercase;}
+.tier-price{font-size:36px;font-weight:600;margin:0 0 10px 0;}
+.tier-period{font-size:16px;opacity:0.7;margin:0 0 30px 0;}
+.tier-features{list-style:none;padding:0;margin:0 0 30px 0;}
+.tier-features li{padding:10px 0;font-size:16px;border-bottom:1px solid #4a0404;opacity:0.9;}
+.tier-features li:last-child{border-bottom:none;}
+.subscribe-form{max-width:500px;margin:60px auto 0 auto;padding:40px;border:2px solid #4a0404;}
+.form-title{font-family:'Cinzel',serif;font-size:24px;text-align:center;margin:0 0 30px 0;letter-spacing:2px;text-transform:uppercase;}
+.form-group{margin-bottom:20px;}
+.form-label{display:block;font-family:'Cinzel',serif;font-size:14px;margin-bottom:8px;letter-spacing:1px;text-transform:uppercase;}
+.form-input,.form-select{width:100%;padding:12px;font-family:'Crimson Text',serif;font-size:16px;border:1px solid #4a0404;background:transparent;transition:all 0.3s ease;}
+.form-input:focus,.form-select:focus{outline:none;border-width:2px;}
+.btn{width:100%;padding:15px;font-family:'Cinzel',serif;font-size:16px;letter-spacing:2px;text-transform:uppercase;border:2px solid #8b0000;cursor:pointer;transition:all 0.3s ease;background:transparent;color:#e8e8e8;}
+.btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+.btn:disabled{opacity:0.5;cursor:not-allowed;}
+.subscriber-status{max-width:600px;margin:0 auto;padding:40px;border:2px solid #4a0404;text-align:center;}
+.status-icon{font-size:72px;margin-bottom:20px;}
+.status-title{font-family:'Cinzel',serif;font-size:28px;margin:0 0 15px 0;letter-spacing:2px;text-transform:uppercase;}
+.status-text{font-size:18px;margin:0 0 30px 0;opacity:0.9;}
+.exclusive-content{margin-top:60px;}
+.exclusive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:30px;}
+.exclusive-item{border:2px solid #4a0404;padding:20px;text-align:center;}
+.exclusive-icon{font-size:48px;margin-bottom:15px;}
+.exclusive-title{font-family:'Cinzel',serif;font-size:18px;margin:0 0 10px 0;letter-spacing:1px;}
+.exclusive-description{font-size:14px;opacity:0.8;margin:0;}
+.footer{padding:40px 20px;text-align:center;border-top:2px solid #4a0404;font-size:14px;opacity:0.8;}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);padding:20px 40px;border:2px solid #8b0000;font-family:'Cinzel',serif;font-size:14px;letter-spacing:1px;z-index:1000;opacity:0;transition:all 0.3s ease;background:#1a1a1a;color:#e8e8e8;}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+@media(max-width:768px){.artist-name{font-size:32px;}.section-title{font-size:28px;}.prints-grid{grid-template-columns:1fr;}.subscription-tiers{grid-template-columns:1fr;}.nav{gap:20px;}}
+</style>
+</head>
+<body>
+<div class="page-container">
+<header class="header" id="header">
+<h1 class="artist-name" id="artistName">vamprecult</h1>
+<p class="tagline" id="tagline">Dark Beauty Through Digital Art</p>
+</header>
+<nav class="nav">
+<a class="nav-link active" data-section="prints">Gallery</a>
+<a class="nav-link" data-section="subscription">Subscribe</a>
+<a class="nav-link" data-section="exclusive">Exclusive</a>
+</nav>
+<main class="content">
+<section id="prints" class="section active">
+<h2 class="section-title" id="printsTitle">Digital Prints</h2>
+<div class="prints-grid">
+<!-- PRINT CARDS -->
+</div>
+</section>
+<section id="subscription" class="section">
+<h2 class="section-title" id="subscriptionTitle">Join the Coven</h2>
+<div class="subscription-tiers">
+<!-- TIER CARDS -->
+</div>
+<div class="subscribe-form" id="subscribeForm">
+<h3 class="form-title">Begin Your Journey</h3>
+<form id="subForm">
+<div class="form-group"><label for="email" class="form-label">Email</label><input type="email" id="email" class="form-input" required placeholder="your.email@example.com"></div>
+<div class="form-group"><label for="tier" class="form-label">Choose Your Tier</label><select id="tier" class="form-select" required><option value="">Select a tier...</option><option value="Acolyte">Acolyte - $5/month</option><option value="Devotee">Devotee - $15/month</option><option value="High Priest">High Priest - $30/month</option></select></div>
+<button type="submit" class="btn" id="subscribeBtn">Join the Coven</button>
+</form>
+<div style="margin-top:40px;padding:30px;border:2px solid;text-align:center;max-width:500px;margin-left:auto;margin-right:auto;" id="paymentInfo">
+<h3 class="form-title" style="margin-bottom:20px;">Payment Instructions</h3>
+<p style="margin-bottom:15px;font-size:16px;">Complete your subscription by transferring your monthly payment to:</p>
+<div style="padding:20px;border:1px solid;margin:20px 0;font-family:'Courier New',monospace;font-size:18px;letter-spacing:1px;cursor:pointer;" id="ibanBox">IBAN: <span id="ibanText">[Your IBAN Here]</span> <button onclick="copyIBAN()">Copy</button></div>
+<p style="font-size:14px;opacity:0.8;margin:0;">Include your email as payment reference</p>
+</div>
+</div>
+</section>
+<section id="exclusive" class="section">
+<h2 class="section-title">Subscriber Sanctuary</h2>
+<div id="exclusiveContent" class="exclusive-grid"></div>
+</section>
+</main>
+<footer class="footer"><p id="footerText">© 2024 vamprecult. All darkness reserved.</p></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+// NAVIGATION
+document.querySelectorAll('.nav-link').forEach(link=>{link.addEventListener('click',()=>{
+document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+link.classList.add('active');
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(link.dataset.section).classList.add('active');
+});});
+
+// SUBSCRIPTION FORM
+const form=document.getElementById('subForm');
+form.addEventListener('submit',e=>{
+e.preventDefault();
+showToast('Subscription noted! Please complete payment via IBAN.');
+form.reset();
+});
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+
+// IBAN COPY
+function copyIBAN(){const t=document.getElementById('ibanText');navigator.clipboard.writeText(t.textContent).then(()=>showToast('IBAN copied!'));
+}
+
+// EXCLUSIVE CONTENT PLACEHOLDER
+const exclusiveContent=[
+{icon:'🖤',title:'Dark Portrait',desc:'Exclusive gothic digital artwork'},
+{icon:'🦇',title:'Night Stalker',desc:'Subscriber-only vampire illustration'}
+];
+const exDiv=document.getElementById('exclusiveContent');
+exclusiveContent.forEach(item=>{
+const div=document.createElement('div');div.className='exclusive-item';div.innerHTML=`<div class='exclusive-icon'>${item.icon}</div><h4 class='exclusive-title'>${item.title}</h4><p class='exclusive-description'>${item.desc}</p>`;
+exDiv.appendChild(div);
+});
+</script>
+</body>
+</html>
